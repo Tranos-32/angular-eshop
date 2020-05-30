@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="">AgneShop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: 'full'}">
+        <a class="nav-link" routerLink="">Home</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="products">Products</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="about">About</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="contact">Contact</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="boxes">Boxes</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="weather">Weather</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input 
+        [(ngModel)]="search"
+        class="form-control mr-sm-2" id="my_search" type="search" placeholder="Search" [ngModelOptions]="{standalone: true}">
+        <ul id="search_results" class="list-group" [hidden]="search == ''">
+          <li 
+          class="list-group-item"
+          *ngFor="let product of response.products | filterBy: {title: search}"
+          >
+          <a [routerLink]="'/products/'+product._id" (click)="search = ''">
+            <img [src]="product.photo">  {{ product.title }}
+          </a>
+          </li>
+        </ul>
+    </form>
+  </div>
+</nav>
